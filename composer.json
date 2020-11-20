@@ -1,0 +1,18 @@
+{
+    "name": "mpmont/ci-toolkit",
+    "description": "View autoloading, notification library and helpers",
+    "type": "library",
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "Marco Monteiro",
+            "email": "marco@marcomonteiro.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Toolkit\\": "/"
+        }
+    },
+    "require": {}
+}
