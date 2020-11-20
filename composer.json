@@ -2,7 +2,7 @@
     "name": "mpmont/ci-toolkit",
     "description": "View autoloading, notification library and helpers",
     "type": "library",
-    "license": "GNU GENERAL PUBLIC LICENSE",
+    "license": "MIT",
     "authors": [
         {
             "name": "Marco Monteiro",
