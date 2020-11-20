@@ -136,35 +136,35 @@ This toolkit brings a few helpers that you can use in your application. For thes
         // output 2.94
     }
 
-### Provided Helpers in the Toolkit
+# Provided Helpers in the Toolkit
 
 The toolkit brings a set of helpers that you can use in your application, this will probably be one of the more growing parts of this project.
 
-#### Array Helper
+## Array Helper
 
 Loading the Array Helper
 
     helper('\Toolkit\array');
 
-##### Array Flatten
+### Array Flatten
 
 Convert a multi-dimensional array into a single-dimensional array.
 
     $newArray = array_flatten($array);
 
-##### Average Array
+### Average Array
 
 Returns the average value in an array of numbers.
 
     $avgArray = avg_array($array);
 
-#### Calc Helper
+## Calc Helper
 
 Loading the Calc Helper
 
     helper('\Toolkit\calc');
 
-##### Convert To Percent
+### Convert To Percent
 
 Get a percentage value based on another value. Example: 1 is how much percentage of 34?
 
@@ -181,7 +181,7 @@ However there's a third param that you can set that gives the round value like s
     echo convertToPercent(1, 34, 2);
     // output 2.94
 
-##### Calc Inverted
+### Calc Inverted
 
 Let's say you need to calc the percentage in a inverted value. So your max score is 0, min score is 200. The closer the value is to zero the higher the percentage. If the value is higher than 200 then 0 is your score.
 
@@ -191,41 +191,41 @@ Let's say you need to calc the percentage in a inverted value. So your max score
     echo calcInverted($maxScore, $minScore, $score);
     // outputs 100
 
-#### Date Helper
+## Date Helper
 
 Loading the Date Helper
 
     helper('\Toolkit\date');
 
-##### Transform date into a new format
+### Transform date into a new format
 
     $date = '20-10-2020';
     $format = 'Y-m-d H:i:s';
     echo validateDate($date, $format)
     // Outputs 20-10-2020 00:00:00
 
-#### Error Helper
+## Error Helper
 
 Loading the Error Helper
 
     helper('\Toolkit\error');
 
-##### Show a 404 error
+### Show a 404 error
 
     show_404();
 
-#### String Helper
+## String Helper
 
 Loading the String Helper
 
     helper('\Toolkit\string');
 
-##### Get random string
+### Get random string
 
     echo getRandomString(10);
     // Outputs a random string with lenght of 10
 
-##### Translate a string from latin character to the correspondent non latin characters
+### Translate a string from latin character to the correspondent non latin characters
 
 So basically all characters like: Áãà will be translated to just "a". This is specially usefull if your doing something with urls and want to remove those from the url.
 
@@ -233,14 +233,14 @@ So basically all characters like: Áãà will be translated to just "a". This is
     echo transliterateString($string);
     // outputs "Cao"
 
-##### Decimal Number
+### Decimal Number
 
 This will translate any int into a decimal. So 3 can be 3.00 or even 3.000
 
     echo decimal_number(3, 2);
     // Outputs 3.00
 
-##### Round up and Round down a value
+### Round up and Round down a value
 
     echo round_up(4.5, 3);
     // Output 5.000
