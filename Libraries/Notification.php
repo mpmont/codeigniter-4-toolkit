@@ -8,7 +8,7 @@ class Notification
     /**
      * SEND NOTIFICATION
      */
-    public function sendNotification($data = [])
+    public function send($data = [])
     {
         $email = \Config\Services::email();
 
