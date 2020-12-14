@@ -17,5 +17,7 @@
             "Toolkit\\": "/"
         }
     },
-    "require": {}
+    "require": {
+        "elephpant/breadcrumb": "^1.1"
+    }
 }
