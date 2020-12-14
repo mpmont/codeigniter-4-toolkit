@@ -24,5 +24,12 @@
     "suggest": {
         "PHP 7.2": "Required to use Codeigniter 4 Framework",
         "benedmunds/codeigniter-ion-auth": "So you can use the authentication features provided"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@composer dump-autoload",
+            "rm -rf public/backend",
+            "cp -R vendor/almasaeed2010/adminlte/dist public/backend"
+        ]
     }
 }
