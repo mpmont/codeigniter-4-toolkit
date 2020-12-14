@@ -9,12 +9,6 @@
             "email": "marco@marcomonteiro.net"
         }
     ],
-    "require": {
-        "php": ">=7.2",
-        "benedmunds/codeigniter-ion-auth": "4.x-dev",
-        "elephpant/breadcrumb": "dev-master",
-        "almasaeed2010/adminlte": "3.0"
-    },
     "replace": {
         "marcogmonteiro/ci-admin-controller": "1.1.7"
     },
