@@ -2,9 +2,7 @@
 
 A set of libraries and helpers for codeigniter 4
 
-
 ## Composer Install
-
 
 This way you should run the following command in your terminal.
 
@@ -18,6 +16,31 @@ Or add the following to your composer.json file.
         }
     }
 
+## Dependencies
+
+- elephpant/breadcrumb
+- almasaeed2010/adminlte
+
+To use the adminLTE in your project you should first create a backend folder inside your public folder.
+
+    $ cd public
+    $ mkdir backend
+
+Then add the following line on your composer.json in your scripts section:
+
+    "scripts": {
+        "post-update-cmd": [
+            "cp -R vendor/almasaeed2010/adminlte/dist/ public/backend"
+        ]
+    },
+
+## Suggestions
+
+As an authentication system I suggest using Ion Auth. To add that to your project just run the following commands on your project.
+
+    $ composer config minimum-stability dev
+    $ composer config repositories.ionAuth vcs git@github.com:benedmunds/CodeIgniter-Ion-Auth.git
+    $ composer require benedmunds/CodeIgniter-Ion-Auth:4.x-dev
 
 ## Base Controller
 
