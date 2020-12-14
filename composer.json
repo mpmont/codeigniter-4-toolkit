@@ -9,6 +9,18 @@
             "email": "marco@marcomonteiro.net"
         }
     ],
+    "minimum-stability": "dev",
+    "require": {
+        "benedmunds/codeigniter-ion-auth": "4.x-dev",
+        "elephpant/breadcrumb": "dev-master",
+        "almasaeed2010/adminlte": "3.0"
+    },
+    "repositories": {
+        "ionAuth": {
+            "type": "vcs",
+            "url": "git@github.com:benedmunds/CodeIgniter-Ion-Auth.git"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Toolkit\\": "/"
