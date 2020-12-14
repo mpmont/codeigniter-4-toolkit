@@ -64,6 +64,8 @@ class BaseController extends Controller
         // Arguments to be used in the callback remap
         $segments = $request->uri->getSegments();
         $this->arguments = array_slice($segments, 2);
+
+        $this->data['adminConf'] = new \Toolkit\Config\Notification();
     }
 
     /**

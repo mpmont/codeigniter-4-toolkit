@@ -30,7 +30,8 @@ Then add the following line on your composer.json in your scripts section:
 
     "scripts": {
         "post-update-cmd": [
-            "cp -R vendor/almasaeed2010/adminlte/dist/ public/backend"
+            "cp -R vendor/almasaeed2010/adminlte/dist/ public/backend",
+            "cp -R vendor/almasaeed2010/adminlte/plugins/ public/backend"
         ]
     },
 
