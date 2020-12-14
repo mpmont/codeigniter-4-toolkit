@@ -16,6 +16,9 @@
         "elephpant/breadcrumb": "dev-master",
         "almasaeed2010/adminlte": "3.0"
     },
+    "replace": {
+        "marcogmonteiro/ci-admin-controller": "1.1.7"
+    },
     "repositories": {
         "ionAuth": {
             "type": "vcs",
