@@ -65,7 +65,7 @@ class BaseController extends Controller
         $segments = $request->uri->getSegments();
         $this->arguments = array_slice($segments, 2);
 
-        $this->data['adminConf'] = new \Toolkit\Config\Notification();
+        $this->data['adminConf'] = new \Toolkit\Config\Backend();
     }
 
     /**

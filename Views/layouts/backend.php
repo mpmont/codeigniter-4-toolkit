@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="<?php echo base_url('backend/dist/css/adminlte.min.css') ?>">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+       [class*="sidebar-dark-"] .sidebar a{color: <?php echo $adminConf->colors['sidebarLink'] ?>;}
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -29,7 +32,7 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url($adminConf->logoutControllerMethod) ?>">
-          <i class="fas fa-th-large"></i> Logout
+          <i class="fas fa-sign-out-alt"></i> Logout
         </a>
       </li>
     </ul>
@@ -37,7 +40,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: <?php echo $adminConf->colors['sidebarBG'] ?>">
     <!-- Brand Logo -->
     <a href="<?php echo site_url($adminConf->brandLink) ?>" class="brand-link">
       <img src="<?php echo base_url($adminConf->brand) ?>" alt="<?php echo $adminConf->siteName ?>" class="brand-image"
@@ -50,12 +53,34 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <?php foreach ($adminConf->navigation as $nav): ?>
-                <li class="nav-item">
-                    <a href="<?php echo site_url($nav['link']) ?>" class="nav-link">
-                        <i class="<?php echo $nav['icon'] ?>"></i>
-                        <p><?php echo $nav['name'] ?></p>
-                    </a>
-                </li>
+                <?php if (!isset($nav['childs'])): ?>
+                    <li class="nav-item">
+                        <a href="<?php echo site_url($nav['link']) ?>" class="nav-link">
+                            <i class="<?php echo $nav['icon'] ?>"></i>
+                            <p><?php echo $nav['name'] ?></p>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="<?php echo $nav['icon'] ?>"></i>
+                            <p>
+                                <?php echo $nav['name'] ?>
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                          <?php foreach ($nav['childs'] as $child): ?>
+                            <li class="nav-item">
+                                <a href="<?php echo $child['link'] ?>" class="nav-link">
+                                    <i class="<?php echo $child['icon'] ?>"></i>
+                                    <p><?php echo $child['name'] ?></p>
+                                </a>
+                            </li>
+                          <?php endforeach?>
+                        </ul>
+                      </li>
+                <?php endif?>
             <?php endforeach?>
         </ul>
       </nav>
@@ -81,6 +106,9 @@
 
     <!-- Main content -->
     <section class="content">
+        <?php if ($adminConf->breadcrumb): ?>
+            <?php echo $breadcrumb->render(); ?>
+        <?php endif?>
         <?php echo $this->renderSection('yield') ?>
     </section>
     <!-- /.content -->
@@ -89,9 +117,9 @@
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-       <b>ADMIN LTE</b> 3.0.5
+       <?php echo $adminConf->copyrightRight ?>
     </div>
-    <strong>Copyright &copy; <?php echo date('Y') ?> <?php echo $adminConf->copyright ?>.</strong> Todos os direitos reservados
+    <?php echo $adminConf->copyrightLeft ?>
   </footer>
 </div>
 <script src="<?php echo base_url('backend/plugins/jquery/jquery.min.js') ?>"></script>
