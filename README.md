@@ -21,20 +21,6 @@ Or add the following to your composer.json file.
 - elephpant/breadcrumb
 - almasaeed2010/adminlte
 
-To use the adminLTE in your project you should first create a backend folder inside your public folder.
-
-    $ cd public
-    $ mkdir backend
-
-Then add the following line on your composer.json in your scripts section:
-
-    "scripts": {
-        "post-update-cmd": [
-            "cp -R vendor/almasaeed2010/adminlte/dist/ public/backend",
-            "cp -R vendor/almasaeed2010/adminlte/plugins/ public/backend"
-        ]
-    },
-
 ## Suggestions
 
 As an authentication system I suggest using Ion Auth. To add that to your project just run the following commands on your project.
@@ -159,6 +145,116 @@ This toolkit brings a few helpers that you can use in your application. For thes
         echo convertToPercent(1, 34, 2);
         // output 2.94
     }
+
+
+# Using the provided AdminLTE template
+
+To use the adminLTE in your project you should first create a backend folder inside your public folder.
+
+    $ cd public
+    $ mkdir backend
+
+Then add the following line on your composer.json in your scripts section:
+
+    "scripts": {
+        "post-update-cmd": [
+            "cp -R vendor/almasaeed2010/adminlte/dist/ public/backend",
+            "cp -R vendor/almasaeed2010/adminlte/plugins/ public/backend"
+        ]
+    },
+
+You can change the folders to adapt your project structure.
+
+## Using the login view
+
+To load the provided login view you shouldn't use the layouts since this is a view without layouts. To do so you can load it in your controllers like so:
+
+    public function login() {
+        $this->layout = false;
+        $this->view = '\Toolkit\Views\login/index';
+    }
+
+This will use the provied login view that looks something like this:
+
+![Login](https://i.imgur.com/wf6i0bB.png)
+
+This view has the form helper has a dependency so you must set that in your controllers.
+
+    protected $helpers = ['form'];
+
+## Using the provided Admin template
+
+There's a simple admin template provied you can use for your backend applications. To use this in your controllers or your base controller that extends to the provied base controller you can just set a new layout pointing to that specific view.
+
+To do this in your controller just set the property layouts with this:
+
+    protected $layout = '\Toolkit\Views\layouts/backend';
+
+The default look of your admin template looks like this:
+
+![Backend](https://i.imgur.com/C9PUEYP.png)
+
+You can configure the looks of your admin template by creating a config class that extends to toolkit\Backend like so:
+
+
+    <?php
+
+    namespace Config;
+
+    use CodeIgniter\Config\BaseConfig;
+
+    class Backend extends \Toolkit\Config\Backend
+    {
+        public $colors = [
+            'sidebarBG' => '#343a40', // Change the sidebar color
+            'sidebarLink' => '#c2c7d0', // Change the sidebar link color
+        ];
+        public $siteName = 'CI - Toolkit'; // Change sitename
+        public $logoutControllerMethod = '#'; // Change logout link
+        public $brandLink = '#'; // Set a brand link relative to the app like /home/index
+        public $brand = 'CI - Tookit'; // Set the brand name
+        public $copyrightLeft = 'All rights reserved'; // Your copyright info Left
+        public $copyrightRight = null; // Your copyright info right
+        public $breadcrumb = false; // Want to use breadcrumbs
+
+        // Your navigation up to 2 levels deap
+        public $navigation = [
+            [
+                'name' => 'Link 1',
+                'link' => '#',
+                'icon' => 'fas fa-circle nav-icon',
+            ],
+        ];
+    }
+
+If you decide to use the breadcrumbs that will use another dependency elephpant/breadcrumb. Look up to their documentation to use the breadcrumbs.
+
+In case you need a menu structure with two levels you should set that up like so:
+
+    public $navigation = [
+        [
+            'name' => 'Link 1',
+            'link' => '#',
+            'icon' => 'fas fa-circle nav-icon',
+            'childs' => [
+                [
+                    'name' => 'Link 1.1',
+                    'link' => '#',
+                    'icon' => 'fas fa-circle nav-icon',
+                ],
+                [
+                    'name' => 'Link 1.2',
+                    'link' => '#',
+                    'icon' => 'fas fa-circle nav-icon',
+                ],
+                [
+                    'name' => 'Link 1.3',
+                    'link' => '#',
+                    'icon' => 'fas fa-circle nav-icon',
+                ],
+            ],
+        ],
+    ];
 
 # Provided Helpers in the Toolkit
 
