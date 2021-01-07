@@ -19,7 +19,8 @@
     },
     "require": {
         "elephpant/breadcrumb": "^1.1",
-        "almasaeed2010/adminlte": "~3.0"
+        "almasaeed2010/adminlte": "~3.0",
+        "pwrsrg/codeigniter4-cart-module": "^1.2"
     },
     "suggest": {
         "PHP 7.2": "Required to use Codeigniter 4 Framework",
