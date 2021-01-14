@@ -38,6 +38,7 @@ class BaseController extends Controller
     protected $data = []; // Set default data array
     protected $layout = 'layouts/application'; // Set default layout
     protected $arguments = []; // arguments that will be sent to the methods
+    protected $directory = null; // Set the base folder in case you're running your site on site.com/admin then this should have the value admin
 
     /**
      * Constructor.
@@ -63,7 +64,7 @@ class BaseController extends Controller
 
         // Arguments to be used in the callback remap
         $segments = $request->uri->getSegments();
-        $this->arguments = array_slice($segments, 2);
+        $this->arguments = array_slice($segments, (($this->directory === '') ? 2 : 3));
 
         $this->data['adminConf'] = new \Toolkit\Config\Backend();
     }
