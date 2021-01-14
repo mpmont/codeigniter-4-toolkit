@@ -109,7 +109,7 @@ class BaseController extends Controller
 
         if ($this->view !== false) {
             $this->data['layout'] = (empty($this->layout)) ? 'layouts/nolayout' : $this->layout;
-            $this->data['yield'] = (!empty($this->view)) ? $this->view : strtolower($view_folder . '/' . $router->methodName());
+            $this->data['yield'] = (!empty($this->view)) ? $this->view : strtolower($this->directory . $view_folder . '/' . $router->methodName());
             echo view($this->data['yield'], $this->data);
         }
     }
