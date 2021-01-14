@@ -18,16 +18,28 @@ Or add the following to your composer.json file.
 
 ## Dependencies
 
-- elephpant/breadcrumb
-- almasaeed2010/adminlte
+- elephpant/breadcrumb [Breacrumb Library](https://github.com/sergiodanilojr/breadcrumb)
+- almasaeed2010/adminlte [Admin LTE template](https://github.com/ColorlibHQ/AdminLTE)
 
-## Suggestions
+## Suggested dependencies
+
+### IonAuth
 
 As an authentication system I suggest using Ion Auth. To add that to your project just run the following commands on your project.
 
     $ composer config minimum-stability dev
     $ composer config repositories.ionAuth vcs git@github.com:benedmunds/CodeIgniter-Ion-Auth.git
     $ composer require benedmunds/CodeIgniter-Ion-Auth:4.x-dev
+
+Documentation for Ion Auth can be found [Here](https://github.com/benedmunds/CodeIgniter-Ion-Auth/blob/4/USERGUIDE.md).
+
+### pwrsrg/codeigniter4-cart-module
+
+In case you're building a store and need a cart module just add this to your composer.json and you're good to go.
+
+    $ composer require pwrsrg/codeigniter4-cart-module
+
+Documentation can be found [Here](https://github.com/pwrsrg/codeigniter4-cart-module).
 
 ## Base Controller
 
