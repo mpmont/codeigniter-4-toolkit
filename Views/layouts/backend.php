@@ -106,6 +106,18 @@
 
     <!-- Main content -->
     <section class="content">
+        <?php if (!empty($confirm)): ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo $confirm ?>
+            </div>
+        <?php endif?>
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-success" role="alert">
+                <?php foreach ($errors as $error): ?>
+                    <?php echo $error ?>
+                <?php endforeach?>
+            </div>
+        <?php endif?>
         <?php if ($adminConf->breadcrumb): ?>
             <?php echo $breadcrumb->render(); ?>
         <?php endif?>
