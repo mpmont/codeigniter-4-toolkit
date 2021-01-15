@@ -95,6 +95,8 @@ class BaseController extends Controller
 
         if (isset($redirect) && is_object($redirect) && get_class($redirect) === 'CodeIgniter\HTTP\RedirectResponse') {
             return $redirect;
+        } elseif (isset($redirect) && is_object($redirect) && get_class($redirect) === 'CodeIgniter\HTTP\Response') {
+            return $redirect;
         } else if (isset($redirect['url'])) {
             $confirm = (isset($redirect['confirm'])) ? $redirect['confirm'] : null;
             if (!empty($confirm)) {
