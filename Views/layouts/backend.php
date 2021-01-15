@@ -6,15 +6,13 @@
   <title><?php echo $adminConf->siteName ?> | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url('backend/plugins/fontawesome-free/css/all.min.css') ?>">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo base_url('backend/dist/css/adminlte.min.css') ?>">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <?php foreach ($adminConf->css as $key => $file): ?>
+        <?php if (filter_var($file, FILTER_VALIDATE_URL)): ?>
+            <link rel="stylesheet" href="<?php echo $file ?>">
+        <?php else: ?>
+            <link rel="stylesheet" href="<?php echo base_url($adminConf->assetsPath . $file) ?>">
+        <?php endif;?>
+    <?php endforeach?>
   <style>
        [class*="sidebar-dark-"] .sidebar a{color: <?php echo $adminConf->colors['sidebarLink'] ?>;}
   </style>
@@ -134,8 +132,12 @@
     <?php echo $adminConf->copyrightLeft ?>
   </footer>
 </div>
-<script src="<?php echo base_url('backend/plugins/jquery/jquery.min.js') ?>"></script>
-<script src="<?php echo base_url('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-<script src="<?php echo base_url('backend/dist/js/adminlte.min.js') ?>"></script>
+<?php foreach ($adminConf->js as $key => $file): ?>
+    <?php if (filter_var($file, FILTER_VALIDATE_URL)): ?>
+        <script src="<?php echo $file ?>"></script>
+    <?php else: ?>
+        <script src="<?php echo base_url($adminConf->assetsPath . $file) ?>"></script>
+    <?php endif;?>
+<?php endforeach?>
 </body>
 </html>

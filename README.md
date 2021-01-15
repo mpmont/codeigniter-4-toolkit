@@ -229,6 +229,21 @@ You can configure the looks of your admin template by creating a config class th
         public $copyrightRight = null; // Your copyright info right
         public $breadcrumb = false; // Want to use breadcrumbs
 
+        public $assetsPath = 'backend'; // Set your base folder in your assets structrure, should be the same folder you set on your composer file
+
+        // A list of all the assets you're using in your backend application, just add more here to add your custom css and js
+        public $css = [
+            '/plugins/fontawesome-free/css/all.min.css',
+            'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.cs',
+            '/dist/css/adminlte.min.css',
+            'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700',
+        ];
+        public $js = [
+            '/plugins/jquery/jquery.min.js',
+            '/plugins/bootstrap/js/bootstrap.bundle.min.js',
+            '/dist/js/adminlte.min.js',
+        ];
+
         // Your navigation up to 2 levels deap
         public $navigation = [
             [
