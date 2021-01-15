@@ -23,6 +23,7 @@
     },
     "suggest": {
         "PHP 7.2": "Required to use Codeigniter 4 Framework",
-        "benedmunds/codeigniter-ion-auth": "So you can use the authentication features provided"
+        "benedmunds/codeigniter-ion-auth": "So you can use the authentication features provided",
+        "pwrsrg/codeigniter4-cart-module": "In case you're building a store, add this to your project to get cart functionality"
     }
 }
