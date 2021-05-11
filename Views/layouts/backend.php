@@ -15,7 +15,19 @@
     <?php endforeach?>
   <style>
        [class*="sidebar-dark-"] .sidebar a{color: <?php echo $adminConf->colors['sidebarLink'] ?>;}
-  </style>
+       [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {color: <?php echo $adminConf->colors['sidebarLink'] ?>;}
+       [class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover {
+            background-color: <?php echo $adminConf->colors['sidebarHover'] ?>;
+            color: <?php echo $adminConf->colors['sidebarHoverLink'] ?>;
+        }
+        .content-wrapper {
+            background-color: <?php echo $adminConf->colors['contentWrapper'] ?>;
+        }
+        .btn.btn-primary,  .btn.btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+            background-color: <?php echo $adminConf->colors['primaryColor']; ?>;
+            border-color: <?php echo $adminConf->colors['primaryColor']; ?>
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -41,10 +53,17 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: <?php echo $adminConf->colors['sidebarBG'] ?>">
     <!-- Brand Logo -->
     <a href="<?php echo site_url($adminConf->brandLink) ?>" class="brand-link">
-      <img src="<?php echo base_url($adminConf->brand) ?>" alt="<?php echo $adminConf->siteName ?>" class="brand-image"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light"> <br></span>
+        <?php if (!empty($adminConf->logo)): ?>
+            <img src="<?php echo base_url($adminConf->logo) ?>" alt="<?php echo $adminConf->brand ?>" class="brand-image"
+               style="opacity: .8">
+            <span class="brand-text font-weight-light">
+                <small><?php echo $adminConf->brand ?></small>
+            </span>
+        <?php else: ?>
+            <?php echo $adminConf->brand ?>
+        <?php endif;?>
     </a>
+
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar Menu -->

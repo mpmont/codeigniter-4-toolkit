@@ -10,15 +10,30 @@
     <link rel="stylesheet" href="<?php echo base_url('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('backend/dist/css/adminlte.min.css') ?>">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .login-page { background-repeat: no-repeat; background-size: cover; }
+        .login-box .card-body { border-radius: 20px }
+        .btn.btn-primary {
+            background-color: <?php echo $adminConf->colors['primaryColor']; ?>;
+            border-color: <?php echo $adminConf->colors['primaryColor']; ?>
+        }
+    </style>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page"
+    <?php if (!empty($adminConf->background)): ?> style="background-image: url(<?php echo $adminConf->background; ?>);"<?php endif;?>>
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?php echo site_url() ?>"><b><?php echo $adminConf->siteName ?></b></a>
+            <a href="<?php echo site_url() ?>">
+                <?php if (!empty($adminConf->logo)): ?>
+                    <img src="<?php echo $adminConf->logo; ?>" alt="<?php echo $adminConf->siteName ?>">
+                <?php else: ?>
+                    <b><?php echo $adminConf->siteName ?></b>
+                <?php endif;?>
+            </a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Login</p>
+                <p class="login-box-msg"><?php echo $adminConf->loginName; ?></p>
                 <?php echo form_open() ?>
                     <div class="input-group mb-3">
                         <input type="email" name="email" required="required" class="form-control" placeholder="Email">
