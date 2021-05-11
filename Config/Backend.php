@@ -7,11 +7,18 @@ class Backend extends BaseConfig
     public $colors = [
         'sidebarBG' => '#343a40',
         'sidebarLink' => '#c2c7d0',
+        'sidebarHover' => 'rgba(255,255,255,.1)',
+        'sidebarHoverLink' => '#FFFFFF',
+        'primaryColor' => '#007bff',
+        'contentWrapper' => '#f4f6f9',
     ];
     public $siteName = 'CI - Toolkit';
     public $logoutControllerMethod = '#';
+    public $loginName = 'Login';
     public $brandLink = '#';
     public $brand = 'CI - Tookit';
+    public $logo = '';
+    public $background = '';
     public $copyrightLeft = 'All rights reserved';
     public $copyrightRight = null;
     public $breadcrumb = false;
