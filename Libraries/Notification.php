@@ -5,6 +5,13 @@ namespace Toolkit\Libraries;
 class Notification
 {
 
+    protected $config;
+
+    public function __construct()
+    {
+        $this->config = config('Notification');
+    }
+
     /**
      * SEND NOTIFICATION
      */
@@ -12,7 +19,7 @@ class Notification
     {
         $email = \Config\Services::email();
 
-        $config = new \Toolkit\Config\Notification();
+        $config = $this->config;
 
         $email->initialize($config->settings);
         if (isset($data['from'])) {

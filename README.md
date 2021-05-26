@@ -283,6 +283,41 @@ In case you need a menu structure with two levels you should set that up like so
         ],
     ];
 
+
+# Notification Library
+
+Sending emails is a core feature of almost all your applications, so instead of having to repeat code to send emails over and over again I create a small library to help you there.
+
+To setup your config you just need to copy the provided codif in /config/Notification.php to your app/Config/Notification.php and don't forget to change your namespace.
+
+    class Notification extends BaseConfig
+    {
+        public $settings = [
+            'mailtype' => 'html',
+            'protocol' => 'smtp',
+            'smtp_host' => '',
+            'smtp_user' => '',
+            'smtp_pass' => '',
+            'smtp_port' => '587',
+            'smtp_timeout' => '15',
+        ];
+        public $from = [
+            'email' => 'noreply@site.com',
+            'name' => 'noreply',
+        ];
+        public $bcc = '';
+    }
+
+Then to use the library is as easy as:
+
+    $notification = new \Toolkit\Libraries\Notification();
+    $data = [
+        'to' => 'destionation@email.com',
+        'subject' => 'Your subject',
+        'message' => 'Your message, this can be a view too',
+    ];
+    $notification->send($data);
+
 # Provided Helpers in the Toolkit
 
 The toolkit brings a set of helpers that you can use in your application, this will probably be one of the more growing parts of this project.
