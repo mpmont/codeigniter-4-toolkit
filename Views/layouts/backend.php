@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php echo $adminConf->siteName ?> | Admin</title>
+  <title><?php echo $adminConf->siteName ?? '' ?> | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php foreach ($adminConf->css as $key => $file): ?>
@@ -14,18 +14,18 @@
         <?php endif;?>
     <?php endforeach?>
   <style>
-       [class*="sidebar-dark-"] .sidebar a{color: <?php echo $adminConf->colors['sidebarLink'] ?>;}
-       [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {color: <?php echo $adminConf->colors['sidebarLink'] ?>;}
+       [class*="sidebar-dark-"] .sidebar a{color: <?php echo $adminConf->colors['sidebarLink'] ?? '#c2c7d0' ?>;}
+       [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {color: <?php echo $adminConf->colors['sidebarLink'] ?? '#c2c7d0' ?>;}
        [class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover {
-            background-color: <?php echo $adminConf->colors['sidebarHover'] ?>;
-            color: <?php echo $adminConf->colors['sidebarHoverLink'] ?>;
+            background-color: <?php echo $adminConf->colors['sidebarHover'] ?? 'rgba(255, 255, 255, .1)'; ?>;
+            color: <?php echo $adminConf->colors['sidebarHoverLink'] ?? '#FFFFFF' ?>;
         }
         .content-wrapper {
-            background-color: <?php echo $adminConf->colors['contentWrapper'] ?>;
+            background-color: <?php echo $adminConf->colors['contentWrapper'] ?? '#f4f6f9' ?>;
         }
         .btn.btn-primary,  .btn.btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
-            background-color: <?php echo $adminConf->colors['primaryColor']; ?>;
-            border-color: <?php echo $adminConf->colors['primaryColor']; ?>
+            background-color: <?php echo $adminConf->colors['primaryColor'] ?? '#007bff'; ?>;
+            border-color: <?php echo $adminConf->colors['primaryColor'] ?? '#007bff'; ?>
         }
     </style>
 </head>
@@ -50,17 +50,17 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: <?php echo $adminConf->colors['sidebarBG'] ?>">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: <?php echo $adminConf->colors['sidebarBG'] ?? '#343a40' ?>">
     <!-- Brand Logo -->
-    <a href="<?php echo site_url($adminConf->brandLink) ?>" class="brand-link">
+    <a href="<?php echo site_url($adminConf->brandLink ?? '') ?>" class="brand-link">
         <?php if (!empty($adminConf->logo)): ?>
             <img src="<?php echo base_url($adminConf->logo) ?>" alt="<?php echo $adminConf->brand ?>" class="brand-image"
                style="opacity: .8">
             <span class="brand-text font-weight-light">
-                <small><?php echo $adminConf->brand ?></small>
+                <small><?php echo $adminConf->brand ?? null ?></small>
             </span>
         <?php else: ?>
-            <?php echo $adminConf->brand ?>
+            <?php echo $adminConf->brand ?? null ?>
         <?php endif;?>
     </a>
 
@@ -135,7 +135,7 @@
                 <?php endforeach?>
             </div>
         <?php endif?>
-        <?php if ($adminConf->breadcrumb): ?>
+        <?php if (isset($adminConf->breadcrumb) && $adminConf->breadcrumb): ?>
             <?php echo $breadcrumb->render(); ?>
         <?php endif?>
         <?php echo $this->renderSection('yield') ?>
@@ -146,9 +146,9 @@
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-       <?php echo $adminConf->copyrightRight ?>
+       <?php echo $adminConf->copyrightRight ?? null ?>
     </div>
-    <?php echo $adminConf->copyrightLeft ?>
+    <?php echo $adminConf->copyrightLeft ?? null ?>
   </footer>
 </div>
 <?php foreach ($adminConf->js as $key => $file): ?>
