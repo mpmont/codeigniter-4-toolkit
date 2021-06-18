@@ -52,6 +52,10 @@ class Notification
             $email->setMessage($data['message']);
         }
 
+        if (isset($data['attach'])) {
+            $email->attach($data['attach']);
+        }
+
         if ($email->send()) {
             return true;
         } else {
