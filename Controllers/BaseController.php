@@ -97,7 +97,7 @@ class BaseController extends Controller
             return $redirect;
         } elseif (isset($redirect) && is_object($redirect) && get_class($redirect) === 'CodeIgniter\HTTP\Response') {
             return $redirect;
-        } else if (isset($redirect['url'])) {
+        } else if (is_array($redirect) && isset($redirect['url'])) {
             $confirm = (isset($redirect['confirm'])) ? $redirect['confirm'] : null;
             if (!empty($confirm)) {
                 return redirect()->to($redirect['url'])->with('confirm', $redirect['confirm']);
@@ -113,6 +113,8 @@ class BaseController extends Controller
             $this->data['layout'] = (empty($this->layout)) ? 'layouts/nolayout' : $this->layout;
             $this->data['yield'] = (!empty($this->view)) ? $this->view : strtolower($this->directory . $view_folder . '/' . $router->methodName());
             echo view($this->data['yield'], $this->data);
+        } else {
+            return $redirect;
         }
     }
 
