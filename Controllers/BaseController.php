@@ -64,7 +64,7 @@ class BaseController extends Controller
         // Check for flashdata
         //--------------------------------------------------------------------
         $this->data['confirm'] = $this->session->getFlashdata('confirm');
-        $this->data['errors']  = $this->session->getFlashdata('errors');
+        $this->data['errors'] = $this->session->getFlashdata('errors');
 
         // Arguments to be used in the callback remap
         $segments = $request->getUri()->getSegments();
