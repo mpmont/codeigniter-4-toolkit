@@ -1,4 +1,5 @@
 <?php
+
 namespace Toolkit\Controllers;
 
 /**
@@ -22,6 +23,8 @@ namespace Toolkit\Controllers;
  */
 
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class BaseController extends Controller
 {
@@ -34,11 +37,12 @@ class BaseController extends Controller
      * @var array
      */
     protected $helpers = [];
-    protected $view = null; // Set default yield view
-    protected $data = []; // Set default data array
-    protected $layout = 'layouts/application'; // Set default layout
-    protected $arguments = []; // arguments that will be sent to the methods
-    protected $directory = null; // Set the base folder in case you're running your site on site.com/admin then this should have the value admin
+    protected ?string $view = null; // Set default yield view
+    protected array $data = []; // Set default data array
+    protected string $layout = 'layouts/application'; // Set default layout
+    protected array $arguments = []; // arguments that will be sent to the methods
+    protected ?string $directory = null; // Set the base folder in case you're running your site on site.com/admin then this should have the value admin
+    protected $session;
 
     /**
      * Constructor.
@@ -63,8 +67,9 @@ class BaseController extends Controller
         $this->data['errors'] = $this->session->getFlashdata('errors');
 
         // Arguments to be used in the callback remap
-        $segments = $request->uri->getSegments();
-        $this->arguments = array_slice($segments, (($this->directory === null) ? 2 : 3));
+        $segments = $request->getUri()->getSegments();
+        $offset = ($this->directory === null) ? 2 : 3;
+        $this->arguments = array_slice($segments, $offset);
 
         $this->data['adminConf'] = new \Toolkit\Config\Backend();
     }
@@ -80,42 +85,49 @@ class BaseController extends Controller
      * and loading the view automagically
      * @param string $method The method we're trying to load
      */
-    public function _remap($method = null)
+    public function _remap(string $method = null)
     {
         $router = service('router');
 
-        $controller_full_name = explode('\\', $router->controllerName());
-        $view_folder = strtolower(end($controller_full_name));
-
-        if (method_exists($this, $method)) {
-            $redirect = call_user_func_array(array($this, $method), $this->arguments);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        if (! method_exists($this, $method)) {
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        if (isset($redirect) && is_object($redirect) && get_class($redirect) === 'CodeIgniter\HTTP\RedirectResponse') {
-            return $redirect;
-        } elseif (isset($redirect) && is_object($redirect) && get_class($redirect) === 'CodeIgniter\HTTP\Response') {
-            return $redirect;
-        } else if (is_array($redirect) && isset($redirect['url'])) {
-            $confirm = (isset($redirect['confirm'])) ? $redirect['confirm'] : null;
-            if (!empty($confirm)) {
-                return redirect()->to($redirect['url'])->with('confirm', $redirect['confirm']);
+        $controllerFullName = explode('\\', $router->controllerName());
+        $viewFolder = strtolower(end($controllerFullName));
+
+        $result = call_user_func_array([$this, $method], $this->arguments);
+
+        if ($result instanceof ResponseInterface) {
+            return $result;
+        }
+
+        if (is_array($result) && isset($result['url'])) {
+            $redirect = redirect()->to($result['url']);
+
+            if (! empty($result['confirm'])) {
+                return $redirect->with('confirm', $result['confirm']);
             }
-            $errors = (isset($redirect['errors'])) ? $redirect['errors'] : null;
-            if (!empty($errors)) {
-                return redirect()->to($redirect['url'])->with('errors', $redirect['errors']);
-            }
-            return redirect()->to($redirect['url']);
-        }
 
-        if ($this->view !== false) {
-            $this->data['layout'] = (empty($this->layout)) ? 'layouts/nolayout' : $this->layout;
-            $this->data['yield'] = (!empty($this->view)) ? $this->view : strtolower($this->directory . $view_folder . '/' . $router->methodName());
-            echo view($this->data['yield'], $this->data);
-        } else {
+            if (! empty($result['errors'])) {
+                return $redirect->with('errors', $result['errors']);
+            }
+
             return $redirect;
         }
+
+        if ($this->view === false) {
+            return $result;
+        }
+
+        $base = $this->directory ? trim($this->directory, '/') . '/' : '';
+        $methodName = $router->methodName();
+
+        $this->data['layout'] = $this->layout ?: 'layouts/nolayout';
+        $this->data['yield'] = $this->view
+            ? $this->view
+            : strtolower($base . $viewFolder . '/' . $methodName);
+
+        return view($this->data['yield'], $this->data);
     }
-
 }
